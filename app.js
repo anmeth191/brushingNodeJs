@@ -1,54 +1,81 @@
-//console.log('Class NodeJs')
-/*
-const helper = require('./helper');
+// const express = require('express');
 
-console.log(helper.user('Tina'));
-console.log(helper.id('1'));
-console.log(helper.lastName('Sadowski'));
-*/
+// const app = express();
+// app.set('view engine' , 'ejs');
 
-/*Read amd write files*/
+// app.get('/',(request  , response )=>{
 
-const fs = require('fs');
-
-//read a file sincronosly
-// const readFile = fs.readFileSync('./hello.text' ,'utf-8');
-// console.log(readFile)
-
-//write a file syncronously \
-
-//fs.writeFileSync('newFile.txt' , readFile);
-
-//read a file async
-/*
-const asyncRead = fs.readFile('./hello.text' , 'utf-8' , (error , data)=>{
-    if(error){
-        console.log('File corrupted')
-    }else
-    {
-        console.log(data)
-    }
-})
-*/
-//with method unlink you can remove a directory (file)
-
-// fs.unlink('./newFile.txt' , (error)=>{
-//     console.log(error)
+//     response.send(`${__dirname}/index.html`)
 // })
 
-//another way to do it is using mkdir , rmdir
+// app.get('/about', (request , response )=>{
 
-fs.mkdir('myFolder' , ()=>{
+//     response.send('about.html')
+// })
 
-    fs.readFile('./hello.text' , 'utf-8' , (error , data) =>{
+//this method tell you how to send data trought the url
+/*
 
-      if(error){
-          console.log(error)
-      }else{
-          fs.writeFile('./myFolder/newFile.txt' , data , ()=>{
-              
-          })
-      }
+app.get('/user:id',(request, response)=>{
 
-    })//end of the readFile
-})//end of the mkdir
+    response.send(`the user id is ${request.params.id}`)
+
+})
+
+app.get('/' , (request , response) =>{
+
+    const user = {
+        name:'Angel',
+        age:30,
+        job:'Developer'
+    }
+
+    response.render('index' ,  {newUser : user } );
+
+})
+
+app.listen(8080)*/
+/*
+const express = require('express');
+const app = express();
+app.set('view engine','ejs');
+app.get('/' , (request , response) =>{
+
+     const data ={
+         name:'Tina',
+         job:'Human Resources',
+         country:'USA'
+     }
+
+     const countries = ['USA' , 'Canada' , 'Nicaragua'];
+    response.render('index' , { user : data , places: countries});
+
+})
+app.listen(8080);*/
+
+const express = require('express');
+const app = express();
+const user ={
+    id:1,
+    name:'Angel',
+    lastName:'Rivera',
+    age:30
+}
+
+const countries = ['Nicaragua' , 'Canada', 'USA'];
+
+app.set('view engine' , 'ejs');
+
+app.get('/' , (request , response)=>{
+  
+    response.render('index' , {data:request.query})
+
+})
+
+ app.get(`/about` , (request , response) =>{
+     response.render('about' , { data: user  , places: countries})
+ })   
+
+
+app.listen(8080);
+console.log('Server is running......');
