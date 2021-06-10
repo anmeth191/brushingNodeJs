@@ -1,7 +1,8 @@
-const http = require('http');
-const server = http.createServer((request , response)=>{
-     response.writeHead(200 , 'text/plain');
-    response.end('Welcome to the Server');
-})
-console.log('Listenning Port 8080')
-server.listen(8080 , '127.0.0.1');
+const express = require('express');
+const app = express();
+const mainController = require('./controllers/mainController');
+app.set('view engine' , 'ejs');
+mainController(app);
+app.use(express.static('./public'));
+app.listen(8080);
+console.log('server running in 8080');

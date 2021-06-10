@@ -10,13 +10,11 @@
 <body>
 
     <h1>Hello world</h1>
-    <ul>
-        <%  tasks.map((element) =>{ %>    
-         <li class="listItems"> <%= element.name %> </li>
-         <li class="listItems"> <%= element.lastName %> </li>
-
-        <% }) %>
-    </ul>
+<ul>
+    <%  tasks.map((element) =>{ %>    
+     <li class="listItems"> <%= element %> </li>
+    <% })  %>
+</ul>
 
 </body>
 </html>
